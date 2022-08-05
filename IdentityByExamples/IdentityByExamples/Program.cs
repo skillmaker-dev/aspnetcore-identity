@@ -1,4 +1,5 @@
 using IdentityByExamples.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,7 +15,8 @@ builder.Services.AddDbContext<ApplicationContext>(opt =>
 
     opt.UseSqlServer(builder.Configuration.GetConnectionString("sqlConnection"))
     );
-
+builder.Services.AddIdentity<User, IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationContext>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
