@@ -15,8 +15,20 @@ builder.Services.AddDbContext<ApplicationContext>(opt =>
 
     opt.UseSqlServer(builder.Configuration.GetConnectionString("sqlConnection"))
     );
-builder.Services.AddIdentity<User, IdentityRole>()
+
+builder.Services.AddIdentity<User, IdentityRole>
+    (
+        opt =>
+        {
+            opt.Password.RequiredLength = 8;
+            opt.Password.RequireUppercase = true;
+            opt.User.RequireUniqueEmail = true;
+        }
+    )
     .AddEntityFrameworkStores<ApplicationContext>();
+
+builder.Services.AddAutoMapper(typeof(Program));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
