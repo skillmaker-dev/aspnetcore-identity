@@ -1,3 +1,4 @@
+using IdentityByExamples.Factory;
 using IdentityByExamples.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -28,6 +29,8 @@ builder.Services.AddIdentity<User, IdentityRole>
     .AddEntityFrameworkStores<ApplicationContext>();
 
 builder.Services.AddAutoMapper(typeof(Program));
+//builder.Services.ConfigureApplicationCookie(o => o.LoginPath = "/Authentication/Login");
+builder.Services.AddScoped<IUserClaimsPrincipalFactory<User>, CustomClaimsFactory>();
 
 var app = builder.Build();
 
@@ -48,6 +51,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
