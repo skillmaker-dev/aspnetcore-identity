@@ -1,3 +1,4 @@
+using EmailService;
 using IdentityByExamples.Factory;
 using IdentityByExamples.Models;
 using Microsoft.AspNetCore.Identity;
@@ -26,11 +27,20 @@ builder.Services.AddIdentity<User, IdentityRole>
             opt.User.RequireUniqueEmail = true;
         }
     )
-    .AddEntityFrameworkStores<ApplicationContext>();
+    .AddEntityFrameworkStores<ApplicationContext>()
+    .AddDefaultTokenProviders();
+
+builder.Services.Configure<DataProtectionTokenProviderOptions>(opt =>
+   opt.TokenLifespan = TimeSpan.FromHours(2));
 
 builder.Services.AddAutoMapper(typeof(Program));
 //builder.Services.ConfigureApplicationCookie(o => o.LoginPath = "/Authentication/Login");
 builder.Services.AddScoped<IUserClaimsPrincipalFactory<User>, CustomClaimsFactory>();
+
+var emailConfig = builder.Configuration.GetSection("EmailConfiguration")
+  .Get<EmailConfiguration>();
+builder.Services.AddSingleton(emailConfig);
+builder.Services.AddScoped<IEmailSender, EmailSender>();
 
 var app = builder.Build();
 

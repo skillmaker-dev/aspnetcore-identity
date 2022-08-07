@@ -1,0 +1,12 @@
+C:\Users\Kazan\source\repos\aspnetcore-identity\IdentityByExamples\EmailService\bin\Debug\net6.0\EmailService.deps.json
+C:\Users\Kazan\source\repos\aspnetcore-identity\IdentityByExamples\EmailService\bin\Debug\net6.0\EmailService.dll
+C:\Users\Kazan\source\repos\aspnetcore-identity\IdentityByExamples\EmailService\bin\Debug\net6.0\EmailService.pdb
+C:\Users\Kazan\source\repos\aspnetcore-identity\IdentityByExamples\EmailService\obj\Debug\net6.0\EmailService.csproj.AssemblyReference.cache
+C:\Users\Kazan\source\repos\aspnetcore-identity\IdentityByExamples\EmailService\obj\Debug\net6.0\EmailService.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Kazan\source\repos\aspnetcore-identity\IdentityByExamples\EmailService\obj\Debug\net6.0\EmailService.AssemblyInfoInputs.cache
+C:\Users\Kazan\source\repos\aspnetcore-identity\IdentityByExamples\EmailService\obj\Debug\net6.0\EmailService.AssemblyInfo.cs
+C:\Users\Kazan\source\repos\aspnetcore-identity\IdentityByExamples\EmailService\obj\Debug\net6.0\EmailService.csproj.CoreCompileInputs.cache
+C:\Users\Kazan\source\repos\aspnetcore-identity\IdentityByExamples\EmailService\obj\Debug\net6.0\EmailService.dll
+C:\Users\Kazan\source\repos\aspnetcore-identity\IdentityByExamples\EmailService\obj\Debug\net6.0\refint\EmailService.dll
+C:\Users\Kazan\source\repos\aspnetcore-identity\IdentityByExamples\EmailService\obj\Debug\net6.0\EmailService.pdb
+C:\Users\Kazan\source\repos\aspnetcore-identity\IdentityByExamples\EmailService\obj\Debug\net6.0\ref\EmailService.dll
