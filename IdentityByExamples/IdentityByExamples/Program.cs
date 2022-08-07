@@ -1,4 +1,5 @@
 using EmailService;
+using IdentityByExamples.CustomTokenProviders;
 using IdentityByExamples.Factory;
 using IdentityByExamples.Models;
 using Microsoft.AspNetCore.Identity;
@@ -25,13 +26,19 @@ builder.Services.AddIdentity<User, IdentityRole>
             opt.Password.RequiredLength = 8;
             opt.Password.RequireUppercase = true;
             opt.User.RequireUniqueEmail = true;
+            opt.SignIn.RequireConfirmedEmail = true;
+            opt.Tokens.EmailConfirmationTokenProvider = "emailconfirmation";
         }
     )
     .AddEntityFrameworkStores<ApplicationContext>()
-    .AddDefaultTokenProviders();
+    .AddDefaultTokenProviders()
+    .AddTokenProvider<EmailConfirmationTokenProvider<User>>("emailconfirmation");
 
 builder.Services.Configure<DataProtectionTokenProviderOptions>(opt =>
    opt.TokenLifespan = TimeSpan.FromHours(2));
+
+builder.Services.Configure<EmailConfirmationTokenProviderOptions>(opt =>
+     opt.TokenLifespan = TimeSpan.FromDays(3));
 
 builder.Services.AddAutoMapper(typeof(Program));
 //builder.Services.ConfigureApplicationCookie(o => o.LoginPath = "/Authentication/Login");

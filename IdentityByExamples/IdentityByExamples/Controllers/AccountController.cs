@@ -49,11 +49,38 @@ namespace IdentityByExamples.Controllers
                 return View(registrationModel);
             }
 
+            var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            var confirmationLink = Url.Action(nameof(ConfirmEmail), "Account", new { token, email = user.Email }, Request.Scheme);
+            var message = new Message(new string[] { user.Email }, "Confirmation email link", confirmationLink, null);
+            await _emailSender.SendEmailAsync(message);
+
             await _userManager.AddToRoleAsync(user, "visitor");
 
-            return RedirectToAction(nameof(HomeController.Index),"Home");
+            return RedirectToAction(nameof(SuccessRegistration));
         }
 
+
+        [HttpGet]
+        public async Task<IActionResult> ConfirmEmail(string token, string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null)
+                return View("Error");
+            var result = await _userManager.ConfirmEmailAsync(user, token);
+            return View(result.Succeeded ? nameof(ConfirmEmail) : "SimpleError");
+        }
+
+        [HttpGet]
+        public IActionResult Error()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult SuccessRegistration()
+        {
+            return View();
+        }
 
         [HttpGet]
         public IActionResult Login(string returnUrl = null)
@@ -78,6 +105,10 @@ namespace IdentityByExamples.Controllers
             }
             else
             {
+                var user = await _userManager.FindByEmailAsync(userModel.Email);
+                if(user is not null && !await _userManager.IsEmailConfirmedAsync(user))
+                    ModelState.AddModelError("", "Please Confirm your email address");
+                else
                 ModelState.AddModelError("", "Invalid UserName or Password");
                 return View();
             }
