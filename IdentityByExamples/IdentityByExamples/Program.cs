@@ -1,5 +1,6 @@
 using EmailService;
 using IdentityByExamples.CustomTokenProviders;
+using IdentityByExamples.CustomValidators;
 using IdentityByExamples.Factory;
 using IdentityByExamples.Models;
 using Microsoft.AspNetCore.Identity;
@@ -28,11 +29,15 @@ builder.Services.AddIdentity<User, IdentityRole>
             opt.User.RequireUniqueEmail = true;
             opt.SignIn.RequireConfirmedEmail = true;
             opt.Tokens.EmailConfirmationTokenProvider = "emailconfirmation";
+            opt.Lockout.AllowedForNewUsers = true;
+            opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(2);
+            opt.Lockout.MaxFailedAccessAttempts = 3;
         }
     )
     .AddEntityFrameworkStores<ApplicationContext>()
     .AddDefaultTokenProviders()
-    .AddTokenProvider<EmailConfirmationTokenProvider<User>>("emailconfirmation");
+    .AddTokenProvider<EmailConfirmationTokenProvider<User>>("emailconfirmation")
+    .AddPasswordValidator<CustomPasswordValidator<User>>();
 
 builder.Services.Configure<DataProtectionTokenProviderOptions>(opt =>
    opt.TokenLifespan = TimeSpan.FromHours(2));
