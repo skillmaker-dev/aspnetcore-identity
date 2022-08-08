@@ -112,6 +112,10 @@ namespace IdentityByExamples.Controllers
                 ModelState.AddModelError("", "The account is locked out");
                 return View();
             }
+            if (result.RequiresTwoFactor)
+            {
+                return RedirectToAction(nameof(LoginTwoStep), new { userModel.Email, userModel.RememberMe, returnUrl });
+            }
             else
             {
                 var user = await _userManager.FindByEmailAsync(userModel.Email);
@@ -123,6 +127,55 @@ namespace IdentityByExamples.Controllers
             }
         }
 
+        [HttpGet]
+        public async Task<IActionResult> LoginTwoStep(string email, bool rememberMe, string? returnUrl)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null)
+            {
+                return View(nameof(Error));
+            }
+            var providers = await _userManager.GetValidTwoFactorProvidersAsync(user);
+            if (!providers.Contains("Email"))
+            {
+                return View(nameof(Error));
+            }
+            var token = await _userManager.GenerateTwoFactorTokenAsync(user, "Email");
+            var message = new Message(new string[] { email }, "Authentication token", token);
+            await _emailSender.SendEmailAsync(message);
+            ViewData["ReturnUrl"] = returnUrl;
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> LoginTwoStep(TwoStepModel twoStepModel, string? returnUrl)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(twoStepModel);
+            }
+            var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
+            if (user == null)
+            {
+                return RedirectToAction(nameof(Error));
+            }
+            var result = await _signInManager.TwoFactorSignInAsync("Email", twoStepModel.TwoFactorCode, twoStepModel.RememberMe, rememberClient: false);
+            if (result.Succeeded)
+            {
+                return RedirectToLocal(returnUrl);
+            }
+            else if (result.IsLockedOut)
+            {
+                //Same logic as in the Login action
+                ModelState.AddModelError("", "The account is locked out");
+                return View();
+            }
+            else
+            {
+                ModelState.AddModelError("", "Invalid Login Attempt");
+                return View();
+            }
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
