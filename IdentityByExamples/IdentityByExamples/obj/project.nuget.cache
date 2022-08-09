@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "xejDo8L2TstZaGo/Xxd47cNBS/JJAIEpzy1q3n9YrIizVeHkZHoaBewnzBSGNxn1eBpnrTekkBwd8BNEDILNsA==",
+  "dgSpecHash": "WfibECUvIjqlnDi9WvqAcDKYT4yzoQfJ76R8yWZDmdnElioZSOT2nAtqcI+mlOUZFr6xr7A++GEJYLcSF619bg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Kazan\\source\\repos\\aspnetcore-identity\\IdentityByExamples\\IdentityByExamples\\IdentityByExamples.csproj",
   "expectedPackageFiles": [
@@ -11,6 +11,7 @@
     "C:\\Users\\Kazan\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",
     "C:\\Users\\Kazan\\.nuget\\packages\\messagepack.annotations\\2.1.152\\messagepack.annotations.2.1.152.nupkg.sha512",
     "C:\\Users\\Kazan\\.nuget\\packages\\messagepackanalyzer\\2.1.152\\messagepackanalyzer.2.1.152.nupkg.sha512",
+    "C:\\Users\\Kazan\\.nuget\\packages\\microsoft.aspnetcore.authentication.google\\6.0.8\\microsoft.aspnetcore.authentication.google.6.0.8.nupkg.sha512",
     "C:\\Users\\Kazan\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\6.0.7\\microsoft.aspnetcore.cryptography.internal.6.0.7.nupkg.sha512",
     "C:\\Users\\Kazan\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\6.0.7\\microsoft.aspnetcore.cryptography.keyderivation.6.0.7.nupkg.sha512",
     "C:\\Users\\Kazan\\.nuget\\packages\\microsoft.aspnetcore.http.features\\5.0.17\\microsoft.aspnetcore.http.features.5.0.17.nupkg.sha512",

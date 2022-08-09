@@ -269,3 +269,4 @@ C:\Users\Kazan\source\repos\aspnetcore-identity\IdentityByExamples\IdentityByExa
 C:\Users\Kazan\source\repos\aspnetcore-identity\IdentityByExamples\IdentityByExamples\obj\Debug\net6.0\IdentityByExamples.pdb
 C:\Users\Kazan\source\repos\aspnetcore-identity\IdentityByExamples\IdentityByExamples\obj\Debug\net6.0\IdentityByExamples.genruntimeconfig.cache
 C:\Users\Kazan\source\repos\aspnetcore-identity\IdentityByExamples\IdentityByExamples\obj\Debug\net6.0\ref\IdentityByExamples.dll
+C:\Users\Kazan\source\repos\aspnetcore-identity\IdentityByExamples\IdentityByExamples\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.Google.dll

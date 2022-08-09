@@ -27,6 +27,7 @@
     <a asp-action="ForgotPassword">Forgot Password</a>
 </div>
     </div>
+    <partial name="_ExternalAuthentication" />
 </div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

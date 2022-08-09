@@ -49,6 +49,15 @@ builder.Services.AddAutoMapper(typeof(Program));
 //builder.Services.ConfigureApplicationCookie(o => o.LoginPath = "/Authentication/Login");
 builder.Services.AddScoped<IUserClaimsPrincipalFactory<User>, CustomClaimsFactory>();
 
+builder.Services.AddAuthentication()
+    .AddGoogle("google", opt =>
+    {
+        var googleAuth = builder.Configuration.GetSection("Authentication:Google");
+        opt.ClientId = googleAuth["ClientId"];
+        opt.ClientSecret = googleAuth["ClientSecret"];
+        opt.SignInScheme = IdentityConstants.ExternalScheme;
+    });
+
 var emailConfig = builder.Configuration.GetSection("EmailConfiguration")
   .Get<EmailConfiguration>();
 builder.Services.AddSingleton(emailConfig);
